@@ -1,7 +1,9 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\User;
+use App\Category;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -25,3 +27,14 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(Category::class, function (Faker $faker) {
+    $name = $faker->name;
+    return [
+        'name' => $name,
+        'slug' => str_slug($name),
+        'order' => rand(-100, 100),
+        'parent' => 0
+    ];
+});
+
