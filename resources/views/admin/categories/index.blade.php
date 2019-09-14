@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <a href="{{route('admin.user.create')}}" class="btn btn-primary">Create a new User</a>
+                    <a href="{{route('admin.category.create')}}" class="btn btn-primary">Create new Category</a>
                 </div>
                 <br/>
                 <div class="panel panel-default">
@@ -27,7 +27,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Slug</th>
+                                    <th>Order</th>
+                                    <th>Parent</th>
                                     <th>Date Created</th>
                                     <th>Date Updated</th>
                                     <th>Option</th>
@@ -35,23 +37,25 @@
                                 </thead>
 
                                 <tbody>
-                                @forelse($users as $user)
+                                @forelse($categories as $category)
                                     <tr>
-                                        <td>{{$user->id}}</td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->created_at}}</td>
-                                        <td>{{$user->updated_at}}</td>
+                                        <td>{{$category->id}}</td>
+                                        <td>{{$category->name}}</td>
+                                        <td>{{$category->slug}}</td>
+                                        <td>{{$category->order}}</td>
+                                        <td>{{$category->parent}}</td>
+                                        <td>{{$category->created_at}}</td>
+                                        <td>{{$category->updated_at}}</td>
                                         <td>
-                                            <a href="{{ route('admin.user.show', ['id' => $user->id]) }}"
+                                            <a href="{{ route('admin.category.show', ['id' => $category->id]) }}"
                                                class="btn btn-primary">Edit</a>
-                                            <a href="{{ route('admin.user.delete', ['id' => $user->id]) }}"
+                                            <a href="{{ route('admin.category.delete', ['id' => $category->id]) }}"
                                                class="btn btn-danger"
                                                onclick="event.preventDefault();
                                                    window.confirm('Are you sure to delete?') ?
-                                                   document.getElementById('user-delete-{{$user->id}}').submit():0;">Delete</a>
-                                            <form action="{{ route('admin.user.delete', ['id' => $user->id]) }}"
-                                                  method="post" id="user-delete-{{$user->id}}">
+                                                   document.getElementById('category-delete-{{$category->id}}').submit():0;">Delete</a>
+                                            <form action="{{ route('admin.category.delete', ['id' => $category->id]) }}"
+                                                  method="post" id="category-delete-{{$category->id}}">
                                                 {{csrf_field()}}
                                                 {{method_field('delete')}}
                                             </form>
@@ -66,7 +70,7 @@
                             </table>
                         </table>
                         <div class="text-center">
-                            {{ $users->links() }}
+                            {{ $categories->links() }}
                         </div>
                     </div>
                 </div>
