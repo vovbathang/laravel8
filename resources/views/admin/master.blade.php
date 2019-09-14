@@ -36,6 +36,8 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li><a href="{{route('admin.user.index')}}">Users</a></li>
+                    &nbsp &nbsp
+                    <li><a href="{{route('admin.category.index')}}">Categories</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

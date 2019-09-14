@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TableCategoryProductOrderRelation extends Migration
+class TableProductTagRelation extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class TableCategoryProductOrderRelation extends Migration
      */
     public function up()
     {
-        Schema::table('product_order', function (Blueprint $table) {
+        Schema::table('product_tag', function (Blueprint $table) {
             $table->foreign("product_id")->references("id")->on("products")
                 ->onDelete("cascade")->onUpdate("cascade");
 
-            $table->foreign("order_id")->references("id")->on("orders")
+            $table->foreign("tag_id")->references("id")->on("tags")
                 ->onDelete("cascade")->onUpdate("cascade");
         });
     }
@@ -29,9 +29,9 @@ class TableCategoryProductOrderRelation extends Migration
      */
     public function down()
     {
-        Schema::table('product_order', function (Blueprint $table) {
+        Schema::table('product_tag', function (Blueprint $table) {
             $table->dropForeign(["product_id"]);
-            $table->dropForeign(["order_id"]);
+            $table->dropForeign(["tag_id"]);
         });
     }
 }

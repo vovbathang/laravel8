@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->integer('order')->default(0);
-            $table->integer('parent')->unsigned();
+            $table->integer('parent')->unsigned()->default(0);
             $table->timestamps();
         });
     }
