@@ -46,8 +46,8 @@
                                            class="btn btn-primary">Edit</a>
                                         <a href="{{ route('admin.user.delete', ['id' => $user->id]) }}"
                                            class="btn btn-danger"
-                                            onclick="event.preventDefault();
-                                                    document.getElementById('user-delete-{{$user->id}}').submit();">Delete</a>
+                                           onclick="event.preventDefault();
+                                               document.getElementById('user-delete-{{$user->id}}').submit();">Delete</a>
                                         <form action="{{ route('admin.user.delete', ['id' => $user->id]) }}"
                                               method="post" id="user-delete-{{$user->id}}">
                                             {{csrf_field()}}

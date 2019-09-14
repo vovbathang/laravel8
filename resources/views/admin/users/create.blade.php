@@ -22,7 +22,7 @@
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }} ">
                                 <label>Email</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                                value="{{old('email')}}">
+                                       value="{{old('email')}}">
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with
                                     anyone else.</small>
                                 <span class="help-block">{{ $errors->first('email') }}</span>
