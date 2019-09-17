@@ -4,12 +4,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <a href="{{route('admin.category.create')}}" class="btn btn-primary">Create new Category</a>
+                    <a href="{{route('admin.product.create')}}" class="btn btn-primary">Create new Product</a>
                 </div>
                 <br/>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="body">Category Lists</div>
+                        <div class="body">Product Lists</div>
                         @if(session('message'))
                             <div class="alert alert-success">
                                 {{session('message')}}
@@ -27,35 +27,37 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Order</th>
-                                    <th>Parent</th>
-                                    <th>Date Created</th>
+                                    <th>Code</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Images</th>
+                                    <th>User Upload</th>
                                     <th>Date Updated</th>
                                     <th>Option</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse($categories as $category)
+                                @forelse($products as $product)
                                     <tr>
-                                        <td>{{$category->id}}</td>
-                                        <td>{{$category->name}}</td>
-                                        <td>{{$category->slug}}</td>
-                                        <td>{{$category->order}}</td>
-                                        <td>{{$category->parent}}</td>
-                                        <td>{{$category->created_at}}</td>
-                                        <td>{{$category->updated_at}}</td>
+                                        <td>{{$product->id}}</td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->code}}</td>
+                                        <td>{{$product->sale_price}}</td>
+                                        <td>{{$product->quantity}}</td>
+                                        <td>No images</td>
+                                        <td>{{$product->user->name}}</td>
+                                        <td>{{$product->updated_at}}</td>
                                         <td>
-                                            <a href="{{ route('admin.category.show', ['id' => $category->id]) }}"
+                                            <a href="{{ route('admin.product.show', ['id' => $product->id]) }}"
                                                class="btn btn-primary">Edit</a>
-                                            <a href="{{ route('admin.category.delete', ['id' => $category->id]) }}"
+                                            <a href="{{ route('admin.product.delete', ['id' => $product->id]) }}"
                                                class="btn btn-danger"
                                                onclick="event.preventDefault();
                                                    window.confirm('Are you sure to delete?') ?
-                                                   document.getElementById('category-delete-{{$category->id}}').submit():0;">Delete</a>
-                                            <form action="{{ route('admin.category.delete', ['id' => $category->id]) }}"
-                                                  method="post" id="category-delete-{{$category->id}}">
+                                                   document.getElementById('product-delete-{{$product->id}}').submit():0;">Delete</a>
+                                            <form action="{{ route('admin.product.delete', ['id' => $product->id]) }}"
+                                                  method="post" id="product-delete-{{$product->id}}">
                                                 {{csrf_field()}}
                                                 {{method_field('delete')}}
                                             </form>
@@ -63,14 +65,14 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5">No data</td>
+                                        <td colspan="8">No data</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
                             </table>
                         </table>
                         <div class="text-center">
-                            {{ $categories->links() }}
+                            {{ $products->links() }}
                         </div>
                     </div>
                 </div>

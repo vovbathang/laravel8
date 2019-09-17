@@ -35,4 +35,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Tag', 'product_tag', 'product_id', 'tag_id');
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany('App\Order', 'product_tag', 'product_id', 'order_id');
+    }
 }
