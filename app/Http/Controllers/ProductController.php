@@ -62,6 +62,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $data['product'] = Product::find($id);
+        dd($data['product']->tags);
         $data['products'] = Product::where([
             ['parent', '=', 0],
             ['id', '<>', 1],
