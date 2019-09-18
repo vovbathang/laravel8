@@ -13,7 +13,7 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Category::create([
-            'name' => 'Uncategorized',
+            'name' => 'uncategorized',
             'slug' => 'uncategorized',
             'order'=>0,
             'parent'=>0

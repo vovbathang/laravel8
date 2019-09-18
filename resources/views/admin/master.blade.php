@@ -38,6 +38,8 @@
                     <li><a href="{{route('admin.user.index')}}">Users</a></li>
                     &nbsp &nbsp
                     <li><a href="{{route('admin.category.index')}}">Categories</a></li>
+                    &nbsp &nbsp
+                    <li><a href="{{route('admin.product.index')}}">Products</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

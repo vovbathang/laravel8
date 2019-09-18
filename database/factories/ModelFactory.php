@@ -2,8 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Order;
+use App\Tag;
 use App\User;
 use App\Category;
+use App\Product;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -37,4 +40,40 @@ $factory->define(Category::class, function (Faker $faker) {
         'parent' => 0
     ];
 });
+
+$factory->define(Tag::class, function (Faker $faker) {
+    $name = $faker->name;
+    return [
+        'name' => $name,
+        'slug' => str_slug($name),
+    ];
+});
+
+$factory->define(Order::class, function (Faker $faker) {
+    $name = $faker->name;
+    return [
+        'user_id' => rand(1, 50),
+        'address' => $faker->text(80),
+        'email' =>$faker->email,
+        'phone'=>$faker->phoneNumber
+    ];
+});
+
+$factory->define(Product::class, function (Faker $faker) {
+
+    return [
+        'name' => $faker->name,
+        'code'=>strtoupper( str_random(6)),
+        'content'=>$faker->text,
+        'regular_price'=> rand(2001, 3000),
+        'sale_price' => rand(1001, 2000),
+        'original_price' => rand(1, 1000),
+        'quantity'=> rand(1, 100),
+        'attributes' => '',
+        'image' => '',
+        'user_id' => rand(1, 50),
+        'category_id' => rand(1, 50)
+    ];
+});
+
 

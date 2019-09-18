@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->integer('original_price')->default(0)->unsigned();
             $table->integer('quantity')->default(0)->unsigned();
             $table->longText('attributes')->nullable();
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
 

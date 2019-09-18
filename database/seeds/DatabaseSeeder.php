@@ -1,5 +1,6 @@
 <?php
 
+use App\Order;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,5 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
+        $this->call(TagsTableSeeder::class);
+        $this->call(OrdersTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
     }
 }
