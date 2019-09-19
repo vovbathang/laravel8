@@ -26,22 +26,23 @@ class ProductController extends Controller
 
     public function create()
     {
-        $data['products'] = Product::where([
-            ['parent', '=', 0],
-            ['id', '<>', 1]
-        ])->get();
+        $data['categories'] = Product::orderBy('name', 'asc')->get();
         return view('admin.products.create', $data);
     }
 
     public function store(Request $request)
     {
         $valid = Validator::make($request->all(), [
-            'name' => 'required|unique:products,name',
-            'parent' => 'sometimes|required|exists:products,id',
+            'name' => 'required',
+            'code' => 'required|unique:products,code',
+            'content' => 'required',
+            'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'required|numeric|min:0',
+            'original_price' => 'required|numeric|min:0',
+            'quantity' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
         ]);
-        $valid->sometimes('parent', 'exists:products,id', function ($input) {
-            return $input->parent !== "0";
-        });
+
         if ($valid->fails()) {
             return redirect()->back()->withErrors($valid)->withInput();
         } else {
