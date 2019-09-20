@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Product;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -58,12 +58,17 @@ class ProductController extends Controller
                 $image = $request->file('image');
                 if (file_exists(public_path('uploads'))) {
                     $folderName = date('Y-m');
-                    $fileName = md5($image->getClientOriginalName() . time()) . '.' . $image->getClientOriginalExtension();
+                    $fileNameWithTimestamp = md5($image->getClientOriginalName() . time());
+                    $fileName = $fileNameWithTimestamp . '.' . $image->getClientOriginalExtension();
+                    $thumbnailFileName = $fileNameWithTimestamp . '_thumb' . '.' . $image->getClientOriginalExtension();
                     if (!file_exists(public_path('uploads/' . $folderName))) {
                         mkdir(public_path('uploads/' . $folderName), 0777);
                     }
-                    $imageName = "$folderName/$fileName";
                     $image->move(public_path('uploads/' . $folderName), $fileName);
+                    Image::make(public_path("uploads/$folderName/$fileName"))
+                        ->resize(200, 150)
+                        ->save(public_path("uploads/$folderName/$thumbnailFileName"));
+                    $imageName = "$folderName/$thumbnailFileName";
                 }
             }
             $product = Product::create([
