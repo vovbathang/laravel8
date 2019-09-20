@@ -30,7 +30,7 @@
                                     <th>Code</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Images</th>
+                                    <th>Image</th>
                                     <th>User Upload</th>
                                     <th>Date Updated</th>
                                     <th>Option</th>
@@ -45,7 +45,11 @@
                                         <td>{{$product->code}}</td>
                                         <td>{{$product->sale_price}}</td>
                                         <td>{{$product->quantity}}</td>
-                                        <td>No images</td>
+                                        <td>
+                                            @if(file_exists(public_path("uploads/$product->image")))
+                                                <img src="{{asset("uploads/$product->image")}}" alt="Image" class="img responsive img-thumbnail">
+                                                @endif
+                                        </td>
                                         <td>{{$product->user->name}}</td>
                                         <td>{{$product->updated_at}}</td>
                                         <td>

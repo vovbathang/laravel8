@@ -10,7 +10,7 @@
                 <div class="panel panel-default"> Add a new product
                     <div class="panel-heading">
 
-                        <form action="{{route('admin.product.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('admin.product.store')}}" method="post" enctype="multipart/form-data" target="_blank">
                             {{csrf_field()}}
                             {{--Name--}}
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }} ">
