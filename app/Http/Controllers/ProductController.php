@@ -40,21 +40,43 @@ class ProductController extends Controller
             'sale_price' => 'required|numeric|min:0',
             'original_price' => 'required|numeric|min:0',
             'quantity' => 'required|numeric|min:0',
+            'image' => 'image|max:2048',
             'category_id' => 'required|exists:categories,id',
+        ], [
+            'category_id' => 'Please input Category exactly.',
+            //image
+            'image.image' => 'Format is not correct',
+            //size
+            'image.max' => 'Exceed capacity :max KB'
         ]);
 
         if ($valid->fails()) {
             return redirect()->back()->withErrors($valid)->withInput();
         } else {
-            $order = 0;
-            if ($request->input('order')) {
-                $order = $request->input('order');
+            $imageName = '';
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                if (file_exists(public_path('uploads'))) {
+                    $folderName = date('Y-m');
+                    $fileName = md5($image->getClientOriginalName() . time()) . '.' . $image->getClientOriginalExtension();
+                    if (!file_exists(public_path('uploads/' . $folderName))) {
+                        mkdir(public_path('uploads/' . $folderName), 0777);
+                    }
+                    $imageName = "$folderName/$fileName";
+                    $image->move(public_path('uploads/' . $folderName), $fileName);
+                }
             }
             $product = Product::create([
                 'name' => $request->input('name'),
-                'slug' => str_slug($request->input('name')),
-                'parent' => $request->input('parent'),
-                'order' => $order
+                'code' => mb_strtoupper($request->input('code'), 'UTF-8'),
+                'content' => $request->input('content'),
+                'regular_price' => $request->input('regular_price'),
+                'sale_price' => $request->input('sale_price'),
+                'original_price' => $request->input('original_price'),
+                'quantity' => $request->input('quantity'),
+                'image' => $imageName,
+                'user_id' => auth()->id(),
+                'category_id' => $request->input('category_id'),
             ]);
             return redirect()->route('admin.product.index')->with('message', " Add $product->name successful.");
         }
