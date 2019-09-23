@@ -46,7 +46,7 @@
                                         <td>{{$product->sale_price}}</td>
                                         <td>{{$product->quantity}}</td>
                                         <td>
-                                            @if(file_exists(public_path("uploads/$product->image")))
+                                            @if(!empty($product->image) && file_exists(public_path("uploads/$product->image")))
                                                 <img src="{{asset("uploads/$product->image")}}" alt="Image" class="img responsive img-thumbnail">
                                                 @endif
                                         </td>

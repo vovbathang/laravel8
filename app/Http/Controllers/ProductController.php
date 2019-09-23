@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\QHOnline\Facades\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Product;
@@ -20,6 +21,7 @@ class ProductController extends Controller
 
     public function index()
     {
+        Tool::getThumbnail('abc.jpg');
         $data['products'] = Product::with('user')->orderBy('id', 'desc')->paginate(20);
         return view('admin.products.index', $data);
     }
