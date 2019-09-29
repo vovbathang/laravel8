@@ -47,8 +47,10 @@
                                         <td>{{$product->quantity}}</td>
                                         <td>
                                             @if(!empty($product->image) && file_exists(public_path("uploads/$product->image")))
-                                                <img src="{{asset("uploads/$product->image")}}" alt="Image" class="img responsive img-thumbnail">
-                                                @endif
+                                                <img src="{{ asset("uploads/$product->image") }}" alt="Image" class="img responsive img-thumbnail">
+                                            @else
+                                                <img src="{{ asset("images/no_images.png") }}" alt="Image" class="img responsive img-thumbnail">
+                                            @endif
                                         </td>
                                         <td>{{$product->user->name}}</td>
                                         <td>{{$product->updated_at}}</td>

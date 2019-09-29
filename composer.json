@@ -40,6 +40,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/QHOnline/helpers.php"
         ]
     },
     "autoload-dev": {
