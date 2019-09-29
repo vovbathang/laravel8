@@ -19,7 +19,7 @@ class Product extends Model
         'attributes',
         'image',
         'user_id',
-        'category_id',
+        'category_id'
     ];
 
     public function category()
@@ -42,5 +42,13 @@ class Product extends Model
         return $this->belongsToMany('App\Order', 'product_order', 'product_id', 'order_id')
             ->withPivot('quantity')
             ->withTimestamps();
+    }
+
+    public function attachments() {
+        return $this->hasMany('App\Attachment', 'product_id', 'id');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Comment', 'product_id', 'id');
     }
 }
