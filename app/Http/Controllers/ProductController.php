@@ -236,7 +236,7 @@ class ProductController extends Controller
         } else {
             $product = Product::find($id);
             if ($product !== null) {
-                //            Thêm hình ảnh
+                // Thêm hình ảnh
                 $imageName = $product->image;
                 if ($request->hasFile('image')) {
                     $this->deleteImage($product->image);
@@ -258,7 +258,6 @@ class ProductController extends Controller
                         ]);
                     }
                 }
-
 
 //            Thêm Attributes
                 $attributes = '';
